@@ -6,10 +6,14 @@
   </div>
 </template>
 
+// Na Options API havia os eventos beforeCreate e created, que nao existem na Composition API.
+// Na Composition API, o bloco setup() é chamado após beforeCreate e created, 
+// tornando esses hooks desnecessários. 
 <script setup>
 import {
   reactive,
   computed,
+  watch,
   onBeforeMount,
   onMounted,
   onBeforeUpdate,
@@ -32,6 +36,14 @@ const doubleCount = computed(() => {
 const increment = () => {
   state.count++
 }
+
+// Watch para observar mudanças em state.count
+// watch(
+//   () => state.count,
+//   (newVal, oldVal) => {
+//     console.log(`watch: count mudou de ${oldVal} para ${newVal}`)
+//   }
+// )
 
 onBeforeMount(() => {
   console.log('onBeforeMount - antes de montar no DOM')
